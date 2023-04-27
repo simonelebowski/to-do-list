@@ -40,10 +40,15 @@ h1 {
     font-size: 4rem;
 }
 
+.main {
+    display: flex;
+}
+
 .nav {
     width: 30rem;
     background-color: #F1F0EA;
     padding: 4rem;
+    height: calc(100vh - 10rem);
 }
 
 .nav-left-div {
@@ -76,4 +81,33 @@ button {
 h2 {
     font-size: 2.8rem;
     font-family: sans-serif;
+}
+
+.main-projects-div {
+    max-width: 80rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 4rem 8rem;
+}
+
+.projects-btn-div {
+    display: flex;
+    padding: 0.8rem 1.6rem;
+    cursor: pointer;
+}
+
+.projects-btn-div:hover {
+    background-color: #F1F0EA;
+    border-radius: 6px;
+}
+
+.plus-icon {
+    font-size: 2rem;
+}
+
+.projects-btn {
+    text-align: start; 
+    background-color: white;
 }
