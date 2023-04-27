@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To do</title>
     <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
 </head>
 <body>
     
@@ -35,12 +36,14 @@
 
         <div class="main-projects-div">
             <h2>All Tasks</h2>
+            <div class="tasks-div"></div>
             <div class="projects-btn-div">
                 <ion-icon class="plus-icon" name="add-outline"></ion-icon>
                 <button class="projects-btn">Add Task</button>
             </div>
             <div class="projects-input-div hidden">
                 <input class="input" type="text" name="myInput" placeholder="Enter text here">
+                <input class="input-date" type="date" id="due-date-input">
                 <div class="input-btns">
                     <button class="input-btn add-btn">Add</button>
                     <button class="input-btn cancel-btn">Cancel</button>
