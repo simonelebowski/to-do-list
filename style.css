@@ -8,6 +8,13 @@ html {
     font-size: 62.5%;
 }
 
+/* -------------------------------------------- */
+.hidden {
+    display: none !important;
+}
+
+/* -------------------------------------------- */
+
 .header {
     background-color: #474448;
     height: 10rem;
@@ -100,7 +107,7 @@ h2 {
 
 .projects-btn-div:hover {
     background-color: #F1F0EA;
-    border-radius: 6px;
+    border-radius: 5px;
 }
 
 .plus-icon {
@@ -110,4 +117,35 @@ h2 {
 .projects-btn {
     text-align: start; 
     background-color: white;
+}
+
+.projects-input-div {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.8rem 1.6rem;
+    border-radius: 5px;
+}
+
+.input-btns {
+    display: flex;
+    gap: 1.6rem;
+}
+
+.input-btn {
+    width: 100%;
+    padding: 0.8rem 1.6rem;
+    border-radius: 5px;
+}
+
+.add-btn {
+    background-color: #60D394;
+}
+
+.cancel-btn {
+    background-color: #EE6055;
 }
