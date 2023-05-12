@@ -1,4 +1,4 @@
-import { Task, Project } from "./task.js";
+import { Task, Project } from "./classes.js";
 
 const addTaskBtn = document.querySelector('.projects-btn-div');
 const inputDiv = document.querySelector('.projects-input-div');

@@ -1,6 +1,6 @@
 'use strict';
 
-import { Task } from "./js/task.js";
+import { Task } from "./js/classes.js";
 import { addInputField, hideInputField, addProjectInputField, hideProjectInputField, createTask, createProject } from "./js/ui.js";
  
 const addTaskBtn = document.querySelector('.projects-btn-div');

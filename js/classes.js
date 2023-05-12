@@ -6,7 +6,10 @@ export class Task {
 }
 
 export class Project {
+    static currentId = 1;
+
     constructor(name) {
+        this.id = Project.currentId++;
         this.name = name;
         this.tasks = [];
     }
