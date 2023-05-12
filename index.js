@@ -1,42 +1,23 @@
 'use strict';
 
+import { Task } from "./js/task.js";
+import { addInputField, hideInputField, addProjectInputField, hideProjectInputField, createTask, createProject } from "./js/ui.js";
+ 
 const addTaskBtn = document.querySelector('.projects-btn-div');
 const inputDiv = document.querySelector('.projects-input-div');
-const cancelBtn = document.querySelector('.cancel-btn');
-const addBtn = document.querySelector('.add-btn');
+const cancelBtn = document.querySelector('.cancel-task');
+const addBtn = document.querySelector('.add-task');
+const addProjectField = document.querySelector('.add-project-field');
+const addProject = document.querySelector('.add-project');
+const cancelProject = document.querySelector('.cancel-project');
 
-class Task {
-    constructor(task, dueDate) {
-        this.task = task;
-        this.dueDate = dueDate;
-    }
-}
-
-function addInputField() {
-    addTaskBtn.classList.add('hidden');
-    inputDiv.classList.remove('hidden');
-}
-
-function hideInputField() {
-    addTaskBtn.classList.remove('hidden');
-    inputDiv.classList.add('hidden');
-}
-
-function createTask() {
-    const inputValue = document.querySelector('.input').value;
-    const inputDate = document.querySelector('.input-date').value;
-    const newTask = new Task(inputValue, inputDate);
-    
-    const tasksDiv = document.querySelector(".tasks-div");
-    const newTaskElement = document.createElement("p");
-    newTaskElement.innerText = `${newTask.task} - Due: ${newTask.dueDate}`;
-  
-    tasksDiv.appendChild(newTaskElement);
-
-    hideInputField()
-}
-
+let projects = [];
 
 addTaskBtn.addEventListener('click', addInputField)
 cancelBtn.addEventListener('click', hideInputField)
 addBtn.addEventListener('click', createTask);
+addProjectField.addEventListener('click', addProjectInputField);
+cancelProject.addEventListener('click', hideProjectInputField);
+addProject.addEventListener('click', () => {
+    createProject(projects);
+})

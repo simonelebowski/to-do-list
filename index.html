@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To do</title>
     <link rel="stylesheet" href="style.css">
-    <script src="index.js" defer></script>
+    <script type="module" src="index.js" defer></script>
 </head>
 <body>
     
@@ -23,19 +23,28 @@
         <nav class="nav">
             <div class="nav-left-div">
                 <div class="home-div">
+                    <h2>Home</h2>
                     <button>All Tasks</button>
                     <button>Today</button>
                     <button>This Week</button>
                 </div>
                 <div class="projects-div">
                     <h2>Projects</h2>
-                    <button>Add Project</button>
+                    <div class="projects-list"></div>
+                    <div class="input-project-div flex column hidden">
+                        <input type="text" id="project" name="project" placeholder="Enter Project Name">
+                        <div class="btns-div flex">
+                            <button class="input-btn add-btn add-project">Add</button>
+                            <button class="input-btn cancel-btn cancel-project">Cancel</button>
+                        </div> 
+                    </div>
+                    <button class="add-project-field">Add Project</button>
                 </div>
             </div>
         </nav>
 
         <div class="main-projects-div">
-            <h2>All Tasks</h2>
+            <h2 class="header-tasks">All Tasks</h2>
             <div class="tasks-div"></div>
             <div class="projects-btn-div">
                 <ion-icon class="plus-icon" name="add-outline"></ion-icon>
@@ -45,8 +54,8 @@
                 <input class="input" type="text" name="myInput" placeholder="Enter text here">
                 <input class="input-date" type="date" id="due-date-input">
                 <div class="input-btns">
-                    <button class="input-btn add-btn">Add</button>
-                    <button class="input-btn cancel-btn">Cancel</button>
+                    <button class="input-btn add-task add-btn">Add</button>
+                    <button class="input-btn cancel-task cancel-btn">Cancel</button>
                 </div>
             </div>
         </div>

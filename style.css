@@ -13,6 +13,14 @@ html {
     display: none !important;
 }
 
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
 /* -------------------------------------------- */
 
 .header {
@@ -148,4 +156,8 @@ h2 {
 
 .cancel-btn {
     background-color: #EE6055;
+}
+
+#project {
+    padding: 0.8rem;
 }
