@@ -5,6 +5,8 @@ const addTaskBtn = document.querySelector('.projects-btn-div');
 const inputDiv = document.querySelector('.projects-input-div');
 const projectInputField = document.querySelector('.input-project-div');
 
+let selectedProject = null;
+export let selectedProjectId = null;
 
 function addInputField() {
     addTaskBtn.classList.add('hidden');
@@ -62,7 +64,7 @@ function createProject(projectsArray) {
     newProjectElement.innerText = `${newProject.name}`;
 
     newProjectElement.addEventListener('click', () => {
-        selectProject(newProject);
+        selectProject(newProject, newProject.id);
     });
     
     projectsList.appendChild(newProjectElement);
@@ -73,10 +75,12 @@ function createProject(projectsArray) {
 }
 
 
-function selectProject(project) {
+function selectProject(project, projectId) {
     const header = document.querySelector('.header-tasks');
     header.textContent = project.name;
-    // selectedProject = project;
+
+    selectedProject = findProjectById(projectId);
+    selectedProjectId = projectId;
 }
 
 

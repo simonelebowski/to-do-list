@@ -1,7 +1,7 @@
 'use strict';
 
 import { Task } from "./js/classes.js";
-import { addInputField, hideInputField, addProjectInputField, hideProjectInputField, createTask, createProject } from "./js/ui.js";
+import { addInputField, hideInputField, addProjectInputField, hideProjectInputField, createTask, createProject, selectedProjectId } from "./js/ui.js";
  
 const addTaskBtn = document.querySelector('.projects-btn-div');
 const inputDiv = document.querySelector('.projects-input-div');
@@ -14,11 +14,15 @@ const cancelProject = document.querySelector('.cancel-project');
 export let allTasks = [];
 export let projects = [];
 
+
 addTaskBtn.addEventListener('click', addInputField)
 cancelBtn.addEventListener('click', hideInputField)
-addBtn.addEventListener('click', createTask);
+addBtn.addEventListener('click', () => {
+    createTask(selectedProjectId);
+});
 addProjectField.addEventListener('click', addProjectInputField);
 cancelProject.addEventListener('click', hideProjectInputField);
 addProject.addEventListener('click', () => {
     createProject(projects);
 })
+
