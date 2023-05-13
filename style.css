@@ -6,6 +6,7 @@
 
 html {
     font-size: 62.5%;
+    font-family: sans-serif;
 }
 
 /* -------------------------------------------- */
@@ -19,6 +20,14 @@ html {
 
 .column {
     flex-direction: column;
+}
+
+.center {
+    align-items: center;
+}
+
+.space {
+    justify-content: space-between;
 }
 
 /* -------------------------------------------- */
@@ -111,6 +120,7 @@ h2 {
     display: flex;
     padding: 0.8rem 1.6rem;
     cursor: pointer;
+    gap: 0.6rem;
 }
 
 .projects-btn-div:hover {
@@ -118,8 +128,12 @@ h2 {
     border-radius: 5px;
 }
 
+.projects-btn-div:hover .projects-btn {
+    background-color: #F1F0EA;
+}
+
 .plus-icon {
-    font-size: 2rem;
+    font-size: 3rem;
 }
 
 .projects-btn {
@@ -160,4 +174,31 @@ h2 {
 
 #project {
     padding: 0.8rem;
+}
+
+.task-style {
+    font-size: 1.8rem;
+}
+
+.task-div {
+    padding: 0.8rem 1.6rem;
+    border-radius: 5px;
+}
+
+.task-div:hover {
+    background-color: #F1F0EA;
+    cursor: pointer;
+}
+
+.task-div:hover .icon-dots,
+.task-div:hover .delete-edit-btn {
+    background-color: #F1F0EA;
+}
+
+.icon-dots {
+    background-color: white;
+}
+
+.delete-edit-btn {
+    background-color: white;
 }
