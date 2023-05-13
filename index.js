@@ -11,7 +11,8 @@ const addProjectField = document.querySelector('.add-project-field');
 const addProject = document.querySelector('.add-project');
 const cancelProject = document.querySelector('.cancel-project');
 
-let projects = [];
+export let allTasks = [];
+export let projects = [];
 
 addTaskBtn.addEventListener('click', addInputField)
 cancelBtn.addEventListener('click', hideInputField)

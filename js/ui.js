@@ -1,40 +1,57 @@
 import { Task, Project } from "./classes.js";
+import { projects } from "../index.js"
 
 const addTaskBtn = document.querySelector('.projects-btn-div');
 const inputDiv = document.querySelector('.projects-input-div');
 const projectInputField = document.querySelector('.input-project-div');
+
 
 function addInputField() {
     addTaskBtn.classList.add('hidden');
     inputDiv.classList.remove('hidden');
 }
 
+
 function hideInputField() {
     addTaskBtn.classList.remove('hidden');
     inputDiv.classList.add('hidden');
 }
 
+
 function addProjectInputField() {
     projectInputField.classList.remove('hidden');
 };
+
 
 function hideProjectInputField() {
     projectInputField.classList.add('hidden');
 };
 
-function createTask() {
+
+function findProjectById(projectId) {
+    return projects.find(project => project.id === projectId);
+}
+
+
+function createTask(projectId = null) {
     const inputValue = document.querySelector('.input').value;
     const inputDate = document.querySelector('.input-date').value;
     const newTask = new Task(inputValue, inputDate);
-    
+
     const tasksDiv = document.querySelector(".tasks-div");
     const newTaskElement = document.createElement("p");
     newTaskElement.innerText = `${newTask.task} - Due: ${newTask.dueDate}`;
   
     tasksDiv.appendChild(newTaskElement);
 
+    const project = findProjectById(projectId);
+    if (project) {
+        project.addTask(newTask);
+    }
+
     hideInputField()
 }
+
 
 function createProject(projectsArray) {
     const inputValue = document.querySelector('#project').value;
@@ -55,10 +72,12 @@ function createProject(projectsArray) {
     hideProjectInputField();
 }
 
+
 function selectProject(project) {
     const header = document.querySelector('.header-tasks');
     header.textContent = project.name;
     // selectedProject = project;
 }
+
 
 export { addInputField, hideInputField, addProjectInputField, hideProjectInputField, createTask, createProject };
