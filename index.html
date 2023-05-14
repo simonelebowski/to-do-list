@@ -24,9 +24,9 @@
             <div class="nav-left-div">
                 <div class="home-div">
                     <h2>Home</h2>
-                    <button class="all-tasks">All Tasks</button>
-                    <button>Today</button>
-                    <button>This Week</button>
+                    <button class="all-tasks menu-btn">All Tasks</button>
+                    <button class="menu-btn">Today</button>
+                    <button class="menu-btn">This Week</button>
                 </div>
                 <div class="projects-div">
                     <h2>Projects</h2>
@@ -38,7 +38,7 @@
                             <button class="input-btn cancel-btn cancel-project">Cancel</button>
                         </div> 
                     </div>
-                    <button class="add-project-field">Add Project</button>
+                    <button class="add-project-field menu-btn">Add Project</button>
                 </div>
             </div>
         </nav>
@@ -52,6 +52,7 @@
             </div>
             <div class="projects-input-div hidden">
                 <input class="input" type="text" name="myInput" placeholder="Enter text here">
+                <p class="error-text hidden">Enter task name</p>
                 <input class="input-date" type="date" id="due-date-input">
                 <div class="input-btns">
                     <button class="input-btn add-task add-btn">Add</button>

@@ -95,6 +95,10 @@ button {
     cursor: pointer;
 }
 
+.menu-btn:hover {
+    text-decoration: underline;
+}
+
 .projects-div {
     display: flex;
     flex-direction: column;
@@ -201,4 +205,13 @@ h2 {
 
 .delete-edit-btn {
     background-color: white;
+}
+
+.error-text {
+    font-size: 1.6rem;
+    color: red;
+}
+
+.error {
+    border: 1px solid red;
 }

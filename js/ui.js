@@ -6,6 +6,9 @@ const inputDiv = document.querySelector('.projects-input-div');
 const projectInputField = document.querySelector('.input-project-div');
 const tasksDiv = document.querySelector(".tasks-div");
 const header = document.querySelector('.header-tasks');
+const taskInputField = document.querySelector('.input');
+const taskInputDate = document.querySelector('.input-date');
+const errorText = document.querySelector('.error-text');
 
 // let selectedProject = null;
 export let selectedProjectId = null;
@@ -20,6 +23,8 @@ function addInputField() {
 function hideInputField() {
     addTaskBtn.classList.remove('hidden');
     inputDiv.classList.add('hidden');
+    taskInputField.classList.remove('error');
+    errorText.classList.add('hidden');
 }
 
 function addProjectInputField() {
@@ -38,8 +43,16 @@ function findProjectById(projectId) {
 
 
 function createTask(projectId = null) {
-    const inputValue = document.querySelector('.input').value;
-    const inputDate = document.querySelector('.input-date').value;
+    const inputValue = taskInputField.value;
+    const inputDate = taskInputDate.value;
+
+    // Error handling - Empty fields
+    if (inputValue.trim() === '') {
+        taskInputField.classList.add('error');
+        errorText.classList.remove('hidden');
+        return;
+    }
+
     const newTask = new Task(inputValue, inputDate);
 
     const taskDiv = document.createElement('div');
@@ -54,21 +67,27 @@ function createTask(projectId = null) {
     dueDateElement.innerText = `${newTask.dueDate}`;
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('flex', 'center', 'delete-edit-btn');
+
     // Add icon
     const iconElement = document.createElement('ion-icon');
     iconElement.classList.add('icon-dots');
     iconElement.setAttribute('name', 'ellipsis-vertical-outline');
     deleteBtn.appendChild(iconElement);
 
+    // Append the elements created
     rightDiv.append(dueDateElement, deleteBtn);
     taskDiv.append(newTaskElement, rightDiv);
+    tasksDiv.appendChild(taskDiv);
 
-    tasksDiv.appendChild(taskDiv, rightDiv);
-
+    // Add task to a project
     const project = findProjectById(projectId);
     if (project) {
         project.addTask(newTask);
     }
+
+    // Clearing input fields
+    taskInputField.value = '';
+    taskInputDate.value = '';
 
     hideInputField()
 }
