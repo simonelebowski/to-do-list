@@ -53,8 +53,10 @@ function createTask(projectId = null) {
         return;
     }
 
+    // Create task object
     const newTask = new Task(inputValue, inputDate);
 
+    // Add task
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('flex', 'center', 'space', 'task-div');
     const newTaskElement = document.createElement("p");
@@ -71,8 +73,20 @@ function createTask(projectId = null) {
     // Add icon
     const iconElement = document.createElement('ion-icon');
     iconElement.classList.add('icon-dots');
+    iconElement.addEventListener('click', (event) => {
+        showEdit(event);
+    })
     iconElement.setAttribute('name', 'ellipsis-vertical-outline');
-    deleteBtn.appendChild(iconElement);
+    const editDeleteDiv = document.createElement('div', 'hidden');
+    editDeleteDiv.classList.add('edit-delete-div', 'hidden');
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.classList.add('edit-btns');
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.classList.add('edit-btns');
+    editDeleteDiv.append(editButton, deleteButton);
+    deleteBtn.append(iconElement, editDeleteDiv);
 
     // Append the elements created
     rightDiv.append(dueDateElement, deleteBtn);
@@ -90,6 +104,24 @@ function createTask(projectId = null) {
     taskInputDate.value = '';
 
     hideInputField()
+}
+
+
+function showEdit(event) {
+    const clickedElement = event.target;
+    const nextSibling = clickedElement.nextElementSibling;
+
+    if (!nextSibling.classList.contains('hidden')) {
+        nextSibling.classList.add('hidden');
+        return;
+    }
+
+    const divs = document.querySelectorAll('.edit-delete-div');
+    divs.forEach(function(div) {
+        div.classList.add('hidden');
+    })
+    
+    nextSibling.classList.remove('hidden');
 }
 
 

@@ -205,6 +205,23 @@ h2 {
 
 .delete-edit-btn {
     background-color: white;
+    position: relative;
+}
+
+.edit-delete-div {
+    position: absolute;
+    right: -7.5rem;
+    bottom: 2.7rem;
+    display: flex;
+    flex-direction: column;
+    padding: 0.6rem;
+    background-color: #F1F0EA;
+    z-index: 2;
+}
+
+.edit-btns {
+    padding: 0.4rem;
+    background-color: #F1F0EA;
 }
 
 .error-text {
