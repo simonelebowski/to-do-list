@@ -125,6 +125,18 @@ function showEdit(event) {
 }
 
 
+function hideEdit(event) {
+    const divToHide = document.querySelectorAll('.edit-delete-div');
+    const iconDots = Array.from(document.querySelectorAll('.icon-dots'));
+
+    divToHide.forEach(function(div) {
+        if (!div.contains(event.target) && !iconDots.includes(event.target)) {
+            div.classList.add('hidden');
+        }
+    })
+}
+
+
 function createProject(projectsArray) {
     const inputValue = document.querySelector('#project').value;
     const newProject = new Project(inputValue); 
@@ -188,4 +200,4 @@ function showAllTasks(tasks) {
 // });
 
 
-export { addInputField, hideInputField, addProjectInputField, hideProjectInputField, createTask, createProject, showAllTasks };
+export { addInputField, hideInputField, addProjectInputField, hideProjectInputField, createTask, createProject, showAllTasks, hideEdit };

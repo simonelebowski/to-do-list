@@ -2,7 +2,7 @@
 
 import { Task } from "./js/classes.js";
 import { addInputField, hideInputField, addProjectInputField, hideProjectInputField, createTask, 
-    createProject, selectedProjectId, showAllTasks } from "./js/ui.js";
+    createProject, selectedProjectId, showAllTasks, hideEdit } from "./js/ui.js";
 
 const allTasksBtn = document.querySelector('.all-tasks');
 const addTaskBtn = document.querySelector('.projects-btn-div');
@@ -31,16 +31,9 @@ addProject.addEventListener('click', () => {
     createProject(projects);
 })
 
-// document.addEventListener('click', function(event) {
-//     const divToHide = document.querySelectorAll('.edit-delete-div');
-//     divToHide.forEach(function(div) {
-//         if (!div.contains(event.target) && event.target !== document.querySelector('.icon-dots')) {
-//             div.classList.add('hidden');
-//         }
-//     })
-// })
 
-// function hideEdit(event) {
-//     const divToHide = document.querySelectorAll('.edit-delete-div');
-//     divToHide.forEach(function(div))
-// }
+document.addEventListener('click', (event) => {
+    hideEdit(event);
+})
+
+
