@@ -1,5 +1,5 @@
 import { Task, Project } from "./classes.js";
-import { projects } from "../index.js"
+import { allTasks, projects } from "../index.js"
 
 const addTaskBtn = document.querySelector('.projects-btn-div');
 const inputDiv = document.querySelector('.projects-input-div');
@@ -56,17 +56,35 @@ function createTask(projectId = null) {
     // Create task object
     const newTask = new Task(inputValue, inputDate);
 
-    // Add task
+    // Show task
+    showTask(newTask)
+
+    // Add task to a project
+    const project = findProjectById(projectId);
+    if (project) {
+        project.addTask(newTask);
+    }
+
+    // Clearing input fields
+    taskInputField.value = '';
+    taskInputDate.value = '';
+
+    hideInputField()
+}
+
+
+function showTask(task) {
     const taskDiv = document.createElement('div');
     taskDiv.classList.add('flex', 'center', 'space', 'task-div');
+    taskDiv.id = task.taskId;
     const newTaskElement = document.createElement("p");
-    newTaskElement.classList.add('task-style');
-    newTaskElement.innerText = `${newTask.task}`;
+    newTaskElement.classList.add('task-style', 'task-name');
+    newTaskElement.innerText = `${task.task}`;
     const rightDiv = document.createElement('div');
-    rightDiv.classList.add('flex', 'center');
+    rightDiv.classList.add('flex', 'center', 'date-div');
     const dueDateElement = document.createElement('p');
-    dueDateElement.classList.add('task-style');
-    dueDateElement.innerText = `${newTask.dueDate}`;
+    dueDateElement.classList.add('task-style', 'task-date');
+    dueDateElement.innerText = `${task.dueDate}`;
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('flex', 'center', 'delete-edit-btn');
 
@@ -82,9 +100,15 @@ function createTask(projectId = null) {
     const editButton = document.createElement('button');
     editButton.textContent = 'Edit';
     editButton.classList.add('edit-btns');
+    editButton.addEventListener('click', (event) => {
+        edit(event);
+    })
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.classList.add('edit-btns');
+    deleteButton.addEventListener('click', (event) => {
+        deleteTask(event);
+    })
     editDeleteDiv.append(editButton, deleteButton);
     deleteBtn.append(iconElement, editDeleteDiv);
 
@@ -92,18 +116,75 @@ function createTask(projectId = null) {
     rightDiv.append(dueDateElement, deleteBtn);
     taskDiv.append(newTaskElement, rightDiv);
     tasksDiv.appendChild(taskDiv);
+}
 
-    // Add task to a project
-    const project = findProjectById(projectId);
-    if (project) {
-        project.addTask(newTask);
+
+// function to be completed
+function edit(event) {
+    const taskDiv = event.target.closest('.task-div');
+    const taskNameElement = event.target.closest('.task-div').querySelector('.task-name');
+    const taskDateElement = event.target.closest('.date-div').querySelector('.task-date');
+    const taskName = taskNameElement.textContent;
+    const taskDate = taskDateElement.textContent;
+    const editInput = inputDiv.cloneNode(true);
+
+    // 1. Open the add task inputs when clicking on edit - DONE
+    taskDiv.classList.add('hidden');
+    taskDiv.insertAdjacentElement('afterend', editInput);
+    editInput.classList.remove('hidden');
+
+    // 2. Add the content - DONE
+    const editNameElement = editInput.querySelector('.input');
+    const editDateElement = editInput.querySelector('.input-date');
+    editNameElement.value = taskName;     
+    editDateElement.value = taskDate;
+    
+    // 3. Change the content of the task with the new content from the inputs
+    const addBtn = editInput.querySelector('.input-btns .add-task');
+    addBtn.addEventListener('click', () => {
+        const newTaskName = editNameElement.value;
+        const newTaskDate = editDateElement.value;
+
+        editAdd(taskDiv, taskNameElement, taskDateElement, newTaskName, newTaskDate, editInput);
+    })
+
+    // 4. Keep the same content when clicking cancel and hide the inputs
+    const cancelBtn = editInput.querySelector('.input-btns .cancel-task');
+    cancelBtn.addEventListener('click', () => {
+        editCancel(editInput, taskDiv);
+    });
+}
+
+
+function editAdd(taskDiv, taskNameElement, taskDateElement, newName, newDate, editInput) {
+    const taskId = taskDiv.id;
+    const foundTask = allTasks.find(task => task.taskId == taskId);
+
+    foundTask.task = newName;
+    foundTask.dueDate = newDate;
+    
+    taskNameElement.textContent = newName;
+    taskDateElement.textContent = newDate;
+    editCancel(editInput, taskDiv);
+}
+
+
+function editCancel(editInput, taskDiv) {
+    editInput.remove();
+    taskDiv.classList.remove('hidden');
+}
+
+
+function deleteTask(event) {
+    const taskDiv = event.target.closest('.task-div');
+    const taskId = taskDiv.id;
+    const index = allTasks.findIndex(task => task.taskId == taskId);
+
+    if (index !== -1) {
+        allTasks.splice(index, 1);
     }
-
-    // Clearing input fields
-    taskInputField.value = '';
-    taskInputDate.value = '';
-
-    hideInputField()
+    
+    taskDiv.remove();
 }
 
 
@@ -186,9 +267,7 @@ function showAllTasks(tasks) {
     selectedProjectId = 0;
 
     tasks.forEach((task) => {
-        const newTaskElement = document.createElement("p");
-        newTaskElement.innerText = `${task.task} - Due: ${task.dueDate}`;
-        tasksDiv.appendChild(newTaskElement);
+        showTask(task);
     })
 }
 

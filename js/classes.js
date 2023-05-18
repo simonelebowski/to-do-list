@@ -1,7 +1,10 @@
 import { allTasks } from "../index.js"
 
 export class Task {
+    static currentId = 1;
+
     constructor(task, dueDate) {
+        this.taskId = Task.currentId++;
         this.task = task;
         this.dueDate = dueDate;
 
