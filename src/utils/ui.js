@@ -1,5 +1,6 @@
 import { Task, Project } from "./classes.js";
-import { allTasks, projects } from "../index.js"
+import { allTasks, projects, addProjectField } from "../index.js";
+import { isToday, isThisWeek } from "date-fns";
 
 const addTaskBtn = document.querySelector('.projects-btn-div');
 const inputDiv = document.querySelector('.projects-input-div');
@@ -28,10 +29,13 @@ function hideInputField() {
 }
 
 function addProjectInputField() {
+    addProjectField.classList.add('hidden');
     projectInputField.classList.remove('hidden');
+
 };
 
 function hideProjectInputField() {
+    addProjectField.classList.remove('hidden');
     projectInputField.classList.add('hidden');
 };
 // ----------------------------------------------------
@@ -223,11 +227,13 @@ function createProject(projectsArray) {
     const newProject = new Project(inputValue); 
 
     const projectsList = document.querySelector('.projects-list');
-    const newProjectElement = document.createElement('p');
+    const newProjectElement = document.createElement('button');
+    newProjectElement.classList.add('menu-btn');
     newProjectElement.innerText = `${newProject.name}`;
 
     newProjectElement.addEventListener('click', () => {
         selectProject(newProject, newProject.id);
+        highlightSelectedMenu(newProjectElement);
     });
     
     projectsList.appendChild(newProjectElement);
@@ -254,9 +260,7 @@ function showTasksProject(project) {
     tasksDiv.innerHTML = '';
 
     tasks.forEach((task) => {
-        const newTaskElement = document.createElement("p");
-        newTaskElement.innerText = `${task.task} - Due: ${task.dueDate}`;
-        tasksDiv.appendChild(newTaskElement);
+        showTask(task);
     })
 }
 
@@ -264,11 +268,48 @@ function showTasksProject(project) {
 function showAllTasks(tasks) {
     header.textContent = 'All Tasks';
     tasksDiv.innerHTML = '';
+    addTaskBtn.classList.remove('hidden');
     selectedProjectId = 0;
 
     tasks.forEach((task) => {
         showTask(task);
     })
+}
+
+
+function showTodayTasks() {
+    header.textContent = 'Today';
+    addTaskBtn.classList.add('hidden');
+    tasksDiv.innerHTML = '';
+
+    allTasks.forEach(task => {
+        if (isToday(new Date(task.dueDate))) {
+            showTask(task);
+        }
+    })
+}
+
+
+function showWeekTasks() {
+    header.textContent = 'This Week';
+    addTaskBtn.classList.add('hidden');
+    tasksDiv.innerHTML = '';
+
+    allTasks.forEach(task => {
+        if (isThisWeek(new Date(task.dueDate))) {
+            showTask(task);
+        }
+    })
+}
+
+
+function highlightSelectedMenu(menuClicked) {
+    const menuBtns = document.querySelectorAll('.menu-btn');
+    menuBtns.forEach(btn => {
+        btn.classList.remove('highlight');
+    })
+
+    menuClicked.classList.add('highlight');
 }
 
 // SORTING BY DATE
@@ -279,4 +320,5 @@ function showAllTasks(tasks) {
 // });
 
 
-export { addInputField, hideInputField, addProjectInputField, hideProjectInputField, createTask, createProject, showAllTasks, hideEdit };
+export { addInputField, hideInputField, addProjectInputField, hideProjectInputField, createTask, createProject, showAllTasks, hideEdit, 
+    highlightSelectedMenu, showTodayTasks, showWeekTasks };

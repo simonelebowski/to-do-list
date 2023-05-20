@@ -1,27 +1,40 @@
 'use strict';
 
-import { Task } from "./js/classes.js";
+import { Task } from "./utils/classes.js";
 import { addInputField, hideInputField, addProjectInputField, hideProjectInputField, createTask, 
-    createProject, selectedProjectId, showAllTasks, hideEdit } from "./js/ui.js";
+    createProject, selectedProjectId, showAllTasks, hideEdit, highlightSelectedMenu, showTodayTasks, showWeekTasks } from "./utils/ui.js";
 
 const allTasksBtn = document.querySelector('.all-tasks');
+const todayBtn = document.querySelector('.today-btn');
+const weekBtn = document.querySelector('.week-btn');
 const addTaskBtn = document.querySelector('.projects-btn-div');
 const inputDiv = document.querySelector('.projects-input-div');
 const cancelBtn = document.querySelector('.cancel-task');
 const addBtn = document.querySelector('.add-task');
-const addProjectField = document.querySelector('.add-project-field');
+export const addProjectField = document.querySelector('.add-project-field');
 const addProject = document.querySelector('.add-project');
 const cancelProject = document.querySelector('.cancel-project');
 
 export let allTasks = [];
+// export let todayTasks = [];
+// export let weekTasks = [];
 export let projects = [];
 
 
 allTasksBtn.addEventListener('click', () => {
     showAllTasks(allTasks);
+    highlightSelectedMenu(allTasksBtn);
 })
-addTaskBtn.addEventListener('click', addInputField)
-cancelBtn.addEventListener('click', hideInputField)
+todayBtn.addEventListener('click', () => {
+    showTodayTasks();
+    highlightSelectedMenu(todayBtn);
+});
+weekBtn.addEventListener('click', () => {
+    showWeekTasks();
+    highlightSelectedMenu(weekBtn);
+})
+addTaskBtn.addEventListener('click', addInputField);
+cancelBtn.addEventListener('click', hideInputField);
 addBtn.addEventListener('click', () => {
     createTask(selectedProjectId);
 });

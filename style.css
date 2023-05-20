@@ -9,6 +9,14 @@ html {
     font-family: sans-serif;
 }
 
+:root {
+    --grey-clr: #474448;
+    --btns-clr: #F1F0EA;
+    --hover-clr: #E0DDCF;
+
+    --border-radius: 4px;
+}
+
 /* -------------------------------------------- */
 .hidden {
     display: none !important;
@@ -30,10 +38,30 @@ html {
     justify-content: space-between;
 }
 
+.highlight {
+    background-color: var(--hover-clr);
+}
+
 /* -------------------------------------------- */
 
+h1 {
+    color: white;
+    font-size: 4rem;
+    font-family: sans-serif;
+}
+
+h2 {
+    font-size: 2.8rem;
+    font-family: sans-serif;
+}
+
+input {
+    border: 1px solid var(--grey-clr);
+    outline: none;
+}
+
 .header {
-    background-color: #474448;
+    background-color: var(--grey-clr);
     height: 10rem;
     display: flex;
     align-items: center;
@@ -53,12 +81,6 @@ html {
     gap: 1.2rem;
 }
 
-h1 {
-    color: white;
-    font-size: 4rem;
-    font-family: sans-serif;
-}
-
 .board-icon {
     color: white;
     font-size: 4rem;
@@ -70,7 +92,7 @@ h1 {
 
 .nav {
     width: 30rem;
-    background-color: #F1F0EA;
+    background-color: var(--btns-clr);
     padding: 4rem;
     height: calc(100vh - 10rem);
 }
@@ -95,8 +117,19 @@ button {
     cursor: pointer;
 }
 
+.menu-btn {
+    width: 100%;
+    text-align: left;
+    padding: 1.2rem 1.6rem;
+    border-radius: var(--border-radius);
+}
+
 .menu-btn:hover {
-    text-decoration: underline;
+    background-color: var(--hover-clr);
+}
+
+.projects-list {
+    width: 100%;
 }
 
 .projects-div {
@@ -106,11 +139,24 @@ button {
     align-items: flex-start;
 }
 
-h2 {
-    font-size: 2.8rem;
-    font-family: sans-serif;
+.input-project-div input {
+    border-radius: var(--border-radius);
 }
 
+.input-project-div {
+    gap: 0.8rem;
+}
+
+.btns-div {
+    gap: 0.6rem;
+    font-size: 0.8rem;
+}
+
+.add-project, .cancel-project {
+    font-size: 1.2rem;
+}
+
+/* ---- ---- ---- RIGHT DIV PROJECTS ---- ---- ---- */
 .main-projects-div {
     max-width: 80rem;
     width: 100%;
@@ -128,12 +174,12 @@ h2 {
 }
 
 .projects-btn-div:hover {
-    background-color: #F1F0EA;
-    border-radius: 5px;
+    background-color: var(--hover-clr);
+    border-radius: var(--border-radius);
 }
 
 .projects-btn-div:hover .projects-btn {
-    background-color: #F1F0EA;
+    background-color: var(--hover-clr);
 }
 
 .plus-icon {
@@ -151,10 +197,9 @@ h2 {
     gap: 1.2rem;
 }
 
-.input {
-    width: 100%;
+.input, .input-date {
     padding: 0.8rem 1.6rem;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
 }
 
 .input-btns {
@@ -165,7 +210,8 @@ h2 {
 .input-btn {
     width: 100%;
     padding: 0.8rem 1.6rem;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
 }
 
 .add-btn {
@@ -186,17 +232,17 @@ h2 {
 
 .task-div {
     padding: 0.8rem 1.6rem;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
 }
 
 .task-div:hover {
-    background-color: #F1F0EA;
+    background-color: var(--hover-clr);
     cursor: pointer;
 }
 
 .task-div:hover .icon-dots,
 .task-div:hover .delete-edit-btn {
-    background-color: #F1F0EA;
+    background-color: var(--hover-clr);
 }
 
 .icon-dots {
@@ -215,13 +261,13 @@ h2 {
     display: flex;
     flex-direction: column;
     padding: 0.6rem;
-    background-color: #F1F0EA;
+    background-color: var(--btns-clr);
     z-index: 2;
 }
 
 .edit-btns {
     padding: 0.4rem;
-    background-color: #F1F0EA;
+    background-color: var(--btns-clr);
 }
 
 .error-text {
