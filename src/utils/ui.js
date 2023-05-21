@@ -11,8 +11,8 @@ const taskInputField = document.querySelector('.input');
 const taskInputDate = document.querySelector('.input-date');
 const errorText = document.querySelector('.error-text');
 
-// let selectedProject = null;
 export let selectedProjectId = null;
+export let isNavHidden = false; 
 
 
 // ----------ADD AND HIDE FUNCTIONS--------------------
@@ -38,6 +38,11 @@ function hideProjectInputField() {
     addProjectField.classList.remove('hidden');
     projectInputField.classList.add('hidden');
 };
+
+function hideNav() {
+    const nav = document.querySelector('.nav');
+    nav.classList.toggle('hidden');
+}
 // ----------------------------------------------------
 
 
@@ -312,6 +317,20 @@ function highlightSelectedMenu(menuClicked) {
     menuClicked.classList.add('highlight');
 }
 
+
+function hideNavResize() {
+    const nav = document.querySelector('.nav');
+
+    if (window.innerWidth <= 650 && !isNavHidden) {
+        nav.classList.add('hidden');
+        isNavHidden = true;
+    } else if (window.innerWidth > 650 && isNavHidden) {
+        nav.classList.remove('hidden');
+        isNavHidden = false;
+    }
+}
+
+
 // SORTING BY DATE
 // myArray.sort(function compare(a, b) {
 //     var dateA = new Date(a.date);
@@ -321,4 +340,4 @@ function highlightSelectedMenu(menuClicked) {
 
 
 export { addInputField, hideInputField, addProjectInputField, hideProjectInputField, createTask, createProject, showAllTasks, hideEdit, 
-    highlightSelectedMenu, showTodayTasks, showWeekTasks };
+    highlightSelectedMenu, showTodayTasks, showWeekTasks, hideNavResize, hideNav };
